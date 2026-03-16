@@ -128,7 +128,7 @@ function AboutUsEnhanced({ data }) {
           <div className="about-us-enhanced__founder-frame">
             <Image
               src="/about-us-enhanced-border-image.png"
-              alt=""
+              alt="border-image"
               fill
               className="about-us-enhanced__founder-frame-image"
             />
