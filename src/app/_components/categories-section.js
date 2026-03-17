@@ -5,7 +5,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import Image from "next/image";
 import Link from "next/link";
 
-function CategoriesSection({ title, subtitle, categories = [] }) {
+function CategoriesSection({ title, subtitle, categories = [], ctaText, ctaLink }) {
   if (categories.length === 0) return null;
 
   return (
@@ -35,6 +35,14 @@ function CategoriesSection({ title, subtitle, categories = [] }) {
             </Col>
           ))}
         </Row>
+
+        {ctaText && ctaLink && (
+          <div className="categories-cta">
+            <Link href={ctaLink} className="categories-cta-btn">
+              {ctaText}
+            </Link>
+          </div>
+        )}
       </Container>
     </section>
   );

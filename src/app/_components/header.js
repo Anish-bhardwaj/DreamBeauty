@@ -8,10 +8,10 @@ import { Container, Navbar, Nav, Offcanvas } from "react-bootstrap";
 
 const navItems = [
   { label: "HOME", href: "/" },
-  { label: "SKINCARE", href: "/products?category=skincare" },
-  { label: "MAKEUP", href: "/products?category=makeup" },
-  { label: "HAIRCARE", href: "/products?category=haircare" },
-  { label: "ABOUT", href: "/about-us" },
+  { label: "ABOUT US", href: "/about-us" },
+  { label: "CATEGORIES", href: "/categories" },
+  { label: "PRODUCTS", href: "/products" },
+  { label: "BLOGS", href: "/blogs" },
   { label: "CONTACT", href: "/contact" },
 ];
 

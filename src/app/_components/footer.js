@@ -12,9 +12,9 @@ const footerData = {
   title: "DreamBeauty",
   navLinks: [
     { label: "Home", href: "/" },
-    { label: "Skincare", href: "/products?category=skincare" },
-    { label: "Makeup", href: "/products?category=makeup" },
-    { label: "Haircare", href: "/products?category=haircare" },
+    { label: "Categories", href: "/categories" },
+    { label: "Products", href: "/products" },
+    { label: "Blogs", href: "/blogs" },
     { label: "Contact Us", href: "/contact" },
   ],
   contact: {

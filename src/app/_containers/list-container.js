@@ -420,6 +420,8 @@ function ListContainer() {
         title={categoriesData.title}
         subtitle={categoriesData.subtitle}
         categories={categoriesData.items}
+        ctaText="View All Categories"
+        ctaLink="/categories"
       />
       <AboutUsEnhanced />
       {showcaseData.map((showcase) => (
