@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Script from "next/script";
 import { generateMetadata as genMeta, generateJsonLd } from "@/lib/seo";
 import ProductsContainer from "@/app/products/_containers/products-container";
@@ -36,7 +37,9 @@ export default function ProductsPage() {
         }}
       />
       <main>
-        <ProductsContainer />
+        <Suspense fallback={null}>
+          <ProductsContainer />
+        </Suspense>
       </main>
     </>
   );
