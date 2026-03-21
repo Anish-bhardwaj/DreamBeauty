@@ -12,7 +12,7 @@ export const generateMetadata = ({
   const url = `${SITE_URL}${path}`;
 
   return {
-    title: `${title} | ${SITE_NAME}`,
+    title,
     description,
     keywords,
     robots: {

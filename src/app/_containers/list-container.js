@@ -13,6 +13,7 @@ import CustomOrdersBanner from "@/app/_components/custom-orders-banner";
 import CustomerFeedback from "@/app/_components/customer-feedback";
 import StatsSection from "@/app/_components/stats-section";
 import FaqSection from "@/app/_components/faq-section";
+import { getBestSellingProducts } from "@/data/products";
 
 // Beauty-themed hero slides
 const heroSlides = [
@@ -145,51 +146,14 @@ const videoHighlightsData = {
   ],
 };
 
-// Best selling beauty products
+// Best selling beauty products - from centralized data
 const bestSellingData = {
   title: "Customer Favorites",
   subtitle:
     "Our most-loved products with thousands of 5-star reviews. See why customers keep coming back.",
   ctaText: "View All Products",
   ctaLink: "/products",
-  products: [
-    {
-      id: 1,
-      name: "Hydrating Rose Facial Serum",
-      slug: "hydrating-rose-facial-serum",
-      image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&q=80",
-      originalPrice: 6500,
-      salePrice: 4999,
-      taxText: "Inclusive of all taxes",
-    },
-    {
-      id: 2,
-      name: "Luminous Glow Foundation",
-      slug: "luminous-glow-foundation",
-      image: "https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?w=800&q=80",
-      originalPrice: 4500,
-      salePrice: 3599,
-      taxText: "Inclusive of all taxes",
-    },
-    {
-      id: 3,
-      name: "Velvet Matte Lipstick Set",
-      slug: "velvet-matte-lipstick-set",
-      image: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=800&q=80",
-      originalPrice: 3200,
-      salePrice: 2499,
-      taxText: "Inclusive of all taxes",
-    },
-    {
-      id: 4,
-      name: "Silk Repair Hair Mask",
-      slug: "silk-repair-hair-mask",
-      image: "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?w=800&q=80",
-      originalPrice: 2800,
-      salePrice: 2199,
-      taxText: "Inclusive of all taxes",
-    },
-  ],
+  products: getBestSellingProducts(4),
 };
 
 // Awards & certifications

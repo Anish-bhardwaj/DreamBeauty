@@ -7,20 +7,9 @@ import CustomerReviews from "../_components/customer-reviews";
 import SimilarProducts from "../_components/similar-products";
 import StatsSection from "@/app/_components/stats-section";
 import FaqSection from "@/app/_components/faq-section";
+import { getSimilarProducts } from "@/data/products";
 
-const allProducts = [
-  { id: 101, name: "Hydrating Rose Facial Serum 30ml", slug: "hydrating-rose-facial-serum-30ml-101", image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&q=80", originalPrice: 6500, salePrice: 4999, taxText: "Inclusive of all taxes", category: "Skincare" },
-  { id: 102, name: "Luminous Glow Foundation SPF25", slug: "luminous-glow-foundation-spf25-102", image: "https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?w=800&q=80", originalPrice: 4500, salePrice: 3599, taxText: "Inclusive of all taxes", category: "Makeup" },
-  { id: 103, name: "Velvet Matte Lipstick Set", slug: "velvet-matte-lipstick-set-103", image: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=800&q=80", originalPrice: 3200, salePrice: 2499, taxText: "Inclusive of all taxes", category: "Makeup" },
-  { id: 104, name: "Silk Repair Hair Mask 250ml", slug: "silk-repair-hair-mask-250ml-104", image: "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?w=800&q=80", originalPrice: 2800, salePrice: 2199, taxText: "Inclusive of all taxes", category: "Haircare" },
-  { id: 105, name: "Midnight Bloom Eau de Parfum 50ml", slug: "midnight-bloom-eau-de-parfum-50ml-105", image: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&q=80", originalPrice: 8500, salePrice: 6999, taxText: "Inclusive of all taxes", category: "Fragrance" },
-  { id: 106, name: "Vitamin C Brightening Moisturizer", slug: "vitamin-c-brightening-moisturizer-106", image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&q=80", originalPrice: 3500, salePrice: 2799, taxText: "Inclusive of all taxes", category: "Skincare" },
-  { id: 107, name: "Argan Oil Shampoo 300ml", slug: "argan-oil-shampoo-300ml-107", image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&q=80", originalPrice: 1800, salePrice: 1499, taxText: "Inclusive of all taxes", category: "Haircare" },
-  { id: 108, name: "Precision Liquid Eyeliner", slug: "precision-liquid-eyeliner-108", image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=800&q=80", originalPrice: 1200, salePrice: 999, taxText: "Inclusive of all taxes", category: "Makeup" },
-  { id: 109, name: "Retinol Night Repair Cream", slug: "retinol-night-repair-cream-109", image: "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=800&q=80", originalPrice: 4200, salePrice: 3499, taxText: "Inclusive of all taxes", category: "Skincare" },
-  { id: 110, name: "Fresh Citrus Body Mist 150ml", slug: "fresh-citrus-body-mist-150ml-110", image: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&q=80", originalPrice: 2200, salePrice: 1799, taxText: "Inclusive of all taxes", category: "Fragrance" },
-];
-
+// Dummy reviews - will be replaced with API data
 const reviewsData = [
   {
     id: 1,
@@ -76,19 +65,7 @@ function ProductDetailContainer({ product }) {
     ],
   };
 
-  const similarProducts = allProducts
-    .filter((p) => p.category === product.category && p.id !== product.id)
-    .slice(0, 5);
-
-  const filledProducts =
-    similarProducts.length >= 5
-      ? similarProducts
-      : [
-          ...similarProducts,
-          ...allProducts
-            .filter((p) => p.id !== product.id && !similarProducts.find((sp) => sp.id === p.id))
-            .slice(0, 5 - similarProducts.length),
-        ];
+  const filledProducts = getSimilarProducts(product.id, product.category, 5);
 
   return (
     <React.Fragment>

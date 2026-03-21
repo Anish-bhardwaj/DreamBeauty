@@ -141,18 +141,38 @@ export default async function BlogDetailPage({ params }) {
   const { slug } = await params;
   const blog = blogsData.find((b) => b.slug === slug);
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://yourdomain.com";
+
   const jsonLd = blog
     ? {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
         headline: blog.title,
-        image: blog.image,
+        image: `${siteUrl}${blog.image}`,
         datePublished: blog.date,
+        dateModified: blog.date,
         description: blog.excerpt,
+        keywords: [blog.category, "beauty tips", "DreamBeauty", "clean beauty"],
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": `${siteUrl}/blogs/${blog.slug}`,
+        },
         author: {
           "@type": "Organization",
           name: "DreamBeauty",
+          url: siteUrl,
+          logo: `${siteUrl}/logo.png`,
         },
+        publisher: {
+          "@type": "Organization",
+          name: "DreamBeauty",
+          logo: {
+            "@type": "ImageObject",
+            url: `${siteUrl}/logo.png`,
+          },
+        },
+        articleSection: blog.category,
+        wordCount: blog.content?.reduce((count, block) => count + (block.text?.split(/\s+/).length || 0), 0),
       }
     : null;
 

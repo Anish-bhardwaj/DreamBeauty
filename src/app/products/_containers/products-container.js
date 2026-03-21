@@ -4,103 +4,9 @@ import React from "react";
 import ProductsListing from "@/app/products/_components/products-listing";
 import StatsSection from "@/app/_components/stats-section";
 import FaqSection from "@/app/_components/faq-section";
+import { allProducts, getFiltersData } from "@/data/products";
 
-const productsByCategory = {
-  Skincare: [
-    { name: "Hydrating Rose Facial Serum 30ml", image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&q=80" },
-    { name: "Vitamin C Brightening Moisturizer 50ml", image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&q=80" },
-    { name: "Gentle Foaming Cleanser 150ml", image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&q=80" },
-    { name: "Retinol Night Repair Cream 50ml", image: "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=800&q=80" },
-    { name: "Niacinamide Pore Minimizer 30ml", image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&q=80" },
-    { name: "SPF 50 Daily Sunscreen 60ml", image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&q=80" },
-    { name: "AHA BHA Exfoliating Toner 200ml", image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&q=80" },
-    { name: "Hyaluronic Acid Eye Cream 15ml", image: "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=800&q=80" },
-    { name: "Green Tea Face Mask 100ml", image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&q=80" },
-    { name: "Bakuchiol Anti-Aging Serum 30ml", image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&q=80" },
-  ],
-  Makeup: [
-    { name: "Luminous Glow Foundation SPF25", image: "https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?w=800&q=80" },
-    { name: "Velvet Matte Lipstick Rose Petal", image: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=800&q=80" },
-    { name: "Long-Wear Concealer Stick", image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=800&q=80" },
-    { name: "Precision Liquid Eyeliner", image: "https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?w=800&q=80" },
-    { name: "Volumizing Mascara Jet Black", image: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=800&q=80" },
-    { name: "Cream Blush Duo Palette", image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=800&q=80" },
-    { name: "Setting Powder Translucent", image: "https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?w=800&q=80" },
-    { name: "Eyeshadow Palette Neutral Tones", image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=800&q=80" },
-    { name: "Lip Gloss Berry Shine", image: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=800&q=80" },
-    { name: "Brow Gel Soft Brown", image: "https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?w=800&q=80" },
-  ],
-  Haircare: [
-    { name: "Silk Repair Hair Mask 250ml", image: "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?w=800&q=80" },
-    { name: "Argan Oil Shampoo 300ml", image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&q=80" },
-    { name: "Keratin Conditioner 300ml", image: "https://images.unsplash.com/photo-1560750588-73207b1ef5b8?w=800&q=80" },
-    { name: "Heat Protectant Spray 200ml", image: "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?w=800&q=80" },
-    { name: "Biotin Hair Growth Serum 50ml", image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&q=80" },
-    { name: "Anti-Frizz Smoothing Oil 100ml", image: "https://images.unsplash.com/photo-1560750588-73207b1ef5b8?w=800&q=80" },
-    { name: "Volumizing Dry Shampoo 150ml", image: "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?w=800&q=80" },
-    { name: "Scalp Detox Treatment 100ml", image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&q=80" },
-  ],
-  Fragrance: [
-    { name: "Midnight Bloom Eau de Parfum 50ml", image: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&q=80" },
-    { name: "Fresh Citrus Body Mist 150ml", image: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&q=80" },
-    { name: "Velvet Rose Perfume Oil 10ml", image: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&q=80" },
-    { name: "Ocean Breeze Eau de Toilette 75ml", image: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&q=80" },
-    { name: "Vanilla Dreams Body Spray 200ml", image: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&q=80" },
-    { name: "Luxury Oud Eau de Parfum 50ml", image: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&q=80" },
-  ],
-};
-
-const categories = ["Skincare", "Makeup", "Haircare", "Fragrance"];
-const productTypes = ["Serum", "Cream", "Cleanser", "Lipstick", "Foundation", "Mask", "Oil", "Spray"];
-
-const generateProducts = () => {
-  const products = [];
-  let id = 1;
-
-  categories.forEach((category) => {
-    const items = productsByCategory[category];
-    items.forEach((item, index) => {
-      const typeIndex = index % productTypes.length;
-      const basePrice = 1500 + Math.floor(((id * 7) % 50) * 200);
-      const salePrice = basePrice - Math.floor(basePrice * 0.15);
-
-      products.push({
-        id,
-        name: item.name,
-        slug: `${item.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "")}-${id}`,
-        image: item.image,
-        originalPrice: basePrice,
-        salePrice,
-        taxText: "Inclusive of all taxes",
-        category,
-        productType: productTypes[typeIndex],
-      });
-      id++;
-    });
-  });
-
-  return products;
-};
-
-const productsData = generateProducts();
-
-const filtersData = {
-  categories: categories.map((cat) => ({
-    name: cat,
-    count: productsByCategory[cat].length,
-  })),
-  productTypes: [
-    { name: "Serum", count: 5 },
-    { name: "Cream", count: 5 },
-    { name: "Cleanser", count: 4 },
-    { name: "Lipstick", count: 4 },
-    { name: "Foundation", count: 3 },
-    { name: "Mask", count: 4 },
-    { name: "Oil", count: 4 },
-    { name: "Spray", count: 5 },
-  ],
-  priceRange: { min: 0, max: 15000 },
-};
+const filtersData = getFiltersData();
 
 const sortOptions = [
   { label: "Sort by", value: "default" },
@@ -138,7 +44,7 @@ function ProductsContainer() {
     <React.Fragment>
       <ProductsListing
         title="Our Beauty Collection"
-        products={productsData}
+        products={allProducts}
         filters={filtersData}
         sortOptions={sortOptions}
         productsPerPage={16}
